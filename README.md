@@ -711,9 +711,9 @@ int main() {
 
 -----------------------------------------------------------------------------------------------------
 ## Visual Representations of OOP Concepts
-| ![1 OOP](https://github.com/user-attachments/assets/b4b11787-f714-4e3a-99b9-f4c09a1fce2d) | ![2 OOP](https://github.com/user-attachments/assets/94edf279-a1f7-4ea6-a473-eb9684af9ab3) | ![3 OOP](https://github.com/user-attachments/assets/98485294-9ec1-462d-92a9-64f7c14489b3) |
+| ![1  OOP](https://github.com/user-attachments/assets/64fdf2fb-118d-4703-b30d-993c743f1231) | ![2  OOP](https://github.com/user-attachments/assets/2599dc07-ab31-4de9-99ba-5853020e2ff0) | ![3  OOP](https://github.com/user-attachments/assets/7055b5f8-01f4-4cb7-b50f-fb90a941acb7) |
 |:---:|:---:|:---:|
-| ![4 OOP](https://github.com/user-attachments/assets/ad33843b-a3b5-4ae9-bce1-c8f79c87c8a6) | ![5 OOP](https://github.com/user-attachments/assets/c6b02434-72e9-4e4f-9afd-d03425da1e0a) | ![6 OOP](https://github.com/user-attachments/assets/025a963f-c60a-4a6a-9b9b-9c5bdbbd1991) |
+| ![4  OOP](https://github.com/user-attachments/assets/f3ff1e6d-3533-41cd-ab99-0dcf0b31548a) | ![5  OOP](https://github.com/user-attachments/assets/b0dcc35c-dd41-4b45-9fb5-8fb61287d767) | ![6  OOP](https://github.com/user-attachments/assets/51d55862-da1c-4364-85e1-09f8298cb048) |
 -----------------------------------------------------------------------------------------------------
 
 ## Q. Difference between Procedure Oriented Programming and Object-Oriented Programming?
