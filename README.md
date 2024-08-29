@@ -85,8 +85,6 @@ Example:
 - **`while`**: Used for looping.
 - **`return`**: Used to return values from functions.
 
-![image](https://github.com/user-attachments/assets/f25f0cbf-4c0e-400a-a3a9-25b4904e8b77)
-
 - The sign `<<` is called the insertion operator, used for output in streams.
 - The sign `>>` is called the extraction operator, used for input in streams.
 
@@ -172,7 +170,6 @@ int original = 10;
 int &ref = original; // 'ref' is a reference to 'original'
 ref = 20; // This will also change 'original' to 20
 ```
-![image](https://github.com/user-attachments/assets/04772c02-ee90-46df-839d-21e5f4195544)
 
 ## Q. What is Typecasting in C++?
 
@@ -312,8 +309,6 @@ Control structures in C++ manage the flow of execution within a program. They al
 ## Q. What is a pointer in C++ and how is it used? Additionally, describe what a pointer to a pointer is.
 
 A pointer is a data type that holds the address of another data type. The `&` operator is called the "address of" operator, and the `*` operator is called the "dereference" operator.
-
-![image](https://github.com/user-attachments/assets/f567fe62-d11f-4d5a-a2e1-f4c0048e519a)
 
 ### Applications of a Pointer
 - **Dynamic Memory Allocation**: Pointers are used to allocate and deallocate memory dynamically.
