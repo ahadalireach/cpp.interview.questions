@@ -181,8 +181,6 @@ In C++, you can perform typecasting using different syntax:
 
 Typecasting helps in performing precise operations, especially when dealing with mixed data types.
 
-![Typecasting](https://github.com/user-attachments/assets/f51f1b96-bef1-4e32-950f-518b47a4f458)
-
 ## Q. How Do You Use the Scope Resolution Operator in C++?
 
 The scope resolution operator `::` is used to access global variables or functions from within a function or class where there might be local variables or functions with the same name. It helps in distinguishing between different scopes.
@@ -215,15 +213,10 @@ int main() {
 - **Constants**  
   Constants are unchangeable; once a constant variable is initialized in a program, its value cannot be changed afterwards.
 
-  ![Constants](https://github.com/user-attachments/assets/19209c8a-19ae-418f-bc20-f2bb220bf2cc)
-
 - **Manipulators**  
   Manipulators are used for formatting output:
   - `endl`: Moves to the next line.
   - `setw`: Specifies the width of the output.
-
-  ![Manipulators 1](https://github.com/user-attachments/assets/a0a8f90a-abcf-4233-9b38-0ea28778558c)
-  ![Manipulators 2](https://github.com/user-attachments/assets/0bc535ef-eb20-4357-9983-afa36ddf5b88)
 
 - **Operator Precedence & Operator Associativity**  
   - **Operator Precedence**  
@@ -231,8 +224,6 @@ int main() {
 
   - **Operator Associativity**  
     Resolves the order of operations when operators have the same precedence. Associativity can be "left-to-right" (left associative) or "right-to-left" (right associative). For instance, in the expression `a - b - c`, subtraction is left associative, so it's evaluated as `(a - b) - c`.
-
-  ![Operator Precedence & Associativity](https://github.com/user-attachments/assets/235032a1-c871-44c1-89b5-70045958bd76)
  
 ## Q. What are Control Structures in C++?
 
@@ -241,18 +232,12 @@ Control structures in C++ manage the flow of execution within a program. They al
 - **Sequence Structure**  
   Executes instructions sequentially, one after another.
 
-  ![Sequence Structure](https://github.com/user-attachments/assets/a6178f40-24dd-4355-8fb4-4b4ad3bc4d53)
-
 - **Selection Structure**  
   Chooses instructions based on conditions.
   - Implemented using if-else statements or switch-case statements.
 
-  ![Selection Structure](https://github.com/user-attachments/assets/20c26fe6-c257-4a00-985f-ca5611c3af1f)
-
 - **Loop Structure**  
   Repeats instructions until a condition becomes false.
-
-  ![Loop Structure](https://github.com/user-attachments/assets/4d2298ea-0375-401d-8b98-e1b7e98b5320)
 
 ## Q. What are the differences between for, while, and do-while loops in C++?
 
