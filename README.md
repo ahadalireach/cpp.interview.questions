@@ -1682,6 +1682,175 @@ int main() {
 }
 ```
 
+## Q. What is a virtual base class in inheritance and what problem does it solve?
+
+A **virtual base class** is a concept used in multiple inheritance to prevent ambiguity between multiple instances of a base class. This situation arises when a derived class inherits from multiple base classes that share a common ancestor.
+
+### Problem Explanation
+
+- **Class Structure**:
+  - Class `A` is a parent class of classes `B` and `C`.
+  - Classes `B` and `C` are both parents of class `D`.
+
+- **Inheritance Ambiguity**:
+  - When class `D` tries to access members of class `A`, it inherits them twice (once through `B` and once through `C`).
+  - This leads to ambiguity, causing the compiler to throw an error when trying to access members of class `A`.
+
+### Solution: Virtual Base Class
+
+- To solve this ambiguity, we declare class `A` as a **virtual base class** using the `virtual` keyword.
+- With this declaration, only one copy of the data members and member functions of class `A` is shared among classes `B` and `C`.
+
+### Example Code
+
+```cpp
+#include<iostream>
+using namespace std;
+
+class A { 
+public: 
+    void say() { 
+        cout << "Hello world" << endl; 
+    } 
+}; 
+
+class B : public virtual A { 
+};   
+
+class C : public virtual A { 
+};   
+
+class D : public B, public C { 
+};  
+
+int main() {
+    D abc;
+    abc.say();
+}
+```
+
+## Example
+
+- **Class Structure**:
+  - Class `Student` is a parent class of classes `Test` and `Sports`.
+  - Both `Test` and `Sports` are parent classes of class `Result`.
+
+## Ambiguity in Inheritance
+
+- The data members and member functions of class `Student` will be inherited twice in class `Result`.
+- This is because both `Test` and `Sports` derive from `Student`.
+- When class `Result` tries to access members of class `Student`, it causes ambiguity for the compiler, resulting in an error.
+
+## Solution: Virtual Base Class
+
+- To resolve this ambiguity, we declare class `Student` as a **virtual base class** using the `virtual` keyword.
+- By making `Student` a virtual base class, only one copy of its data members and member functions is passed to the inheriting classes (`Test` and `Sports`).
+
+## Class Implementations
+
+### Student Class
+
+- The `Student` class consists of:
+  - Protected data member: `roll_no`
+  - Member functions:
+    - `set_number(int a)`: Assigns value to `roll_no`.
+    - `print_number()`: Prints the value of `roll_no`.
+
+### Test Class
+
+- The `Test` class inherits from the virtual base class `Student`.
+- It consists of:
+  - Protected data members: `maths`, `physics`
+  - Member functions:
+    - `set_marks(float m1, float m2)`: Assigns values to `maths` and `physics`.
+    - `print_marks()`: Prints the values of `maths` and `physics`.
+
+### Sports Class
+
+- The `Sports` class also inherits from the virtual base class `Student`.
+- It consists of:
+  - Protected data member: `score`
+  - Member functions:
+    - `set_score(float sc)`: Assigns value to `score`.
+    - `print_score()`: Prints the value of `score`.
+
+### Result Class
+
+- The `Result` class inherits from both `Test` and `Sports`.
+- It consists of:
+  - Protected data member: `total`
+  - Member function:
+    - `display()`: 
+      - Calculates the total score by adding `maths`, `physics`, and `score`.
+      - Calls `print_number()`, `print_marks()`, and `print_score()` to display results.
+
+## Example Code
+
+```cpp
+#include<iostream>
+using namespace std;
+
+class Student {
+protected:
+    int roll_no;
+public:
+    void set_number(int a) {
+        roll_no = a;
+    }
+    void print_number(void) {
+        cout << "Your roll no is " << roll_no << endl;
+    }
+};
+
+class Test : public virtual Student {
+protected:
+    float maths, physics;
+public:
+    void set_marks(float m1, float m2) {
+        maths = m1;
+        physics = m2;
+    }
+    void print_marks(void) {
+        cout << "You result is here: " << endl
+             << "Maths: " << maths << endl
+             << "Physics: " << physics << endl;
+    }
+};
+
+class Sports : public virtual Student {
+protected:
+    float score;
+public:
+    void set_score(float sc) {
+        score = sc;
+    }
+    void print_score(void) {
+        cout << "Your PT score is " << score << endl;
+    }
+};
+
+class Result : public Test, public Sports {
+private:
+    float total;
+public:
+    void display(void) {
+        total = maths + physics + score;
+        print_number();
+        print_marks();
+        print_score();
+        cout << "Your total score is: " << total << endl;
+    }
+};
+
+int main() {
+    Result a;
+    a.set_number(4200);
+    a.set_marks(78.9, 99.5);
+    a.set_score(9);
+    a.display();
+}
+```
+
 # -----------------------------------------------------------------------------------------------------------------------------------------------------
 # Standard Template Library (STL)
 
