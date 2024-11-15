@@ -1851,6 +1851,92 @@ int main() {
 }
 ```
 
+## Q. What is the concept of Constructor in Derived Class, Multiple Inheritance, and Virtual Base Class?
+
+### **Constructors in Derived Class**
+- Constructors can be used in derived classes in C++.
+- **No-Argument Constructor in Base Class**:  
+  If the base class constructor does not require arguments, the derived class does not need to define a constructor.
+- **With Arguments in Base Class**:  
+  If the base class constructor requires arguments, the derived class must pass arguments to the base class constructor.
+- If both base and derived classes have constructors, the base class constructor is executed **first**.
+
+
+### **Constructors in Multiple Inheritance**
+- In multiple inheritance, **base class constructors** are executed in the order they are declared in the derived class definition.
+  - Example:
+    - If a derived class `C` inherits from `A` and `B`, and `A` is listed before `B`, then the constructor of `A` will execute first.
+    - If `B` is listed before `A`, then the constructor of `B` will execute first.
+- In **multilevel inheritance**, constructors are executed in the order of inheritance.  
+  For example:
+  - Class `A` → Class `B` → Class `C`.
+  - Constructor order: `A` → `B` → `C`.
+
+### **Special Syntax for Passing Arguments**
+C++ allows a special syntax to pass arguments to multiple base classes in inheritance.  
+
+**Syntax**:
+```cpp
+DerivedConstructor(arg1, arg2, arg3...): Base1Constructor(arg1, arg2), Base2Constructor(arg3, arg4) {
+    // Derived class body
+}
+```
+
+```cpp
+class Base1 {
+public:
+    Base1(int x) { cout << "Base1 Constructor: " << x << endl; }
+};
+
+class Base2 {
+public:
+    Base2(int y) { cout << "Base2 Constructor: " << y << endl; }
+};
+
+class Derived : public Base1, public Base2 {
+public:
+    Derived(int x, int y, int z) : Base1(x), Base2(y) {
+        cout << "Derived Constructor: " << z << endl;
+    }
+};
+```
+
+## Special Case: Virtual Base Class
+
+- **Virtual base class constructors** are invoked **before non-virtual base classes**.
+- If there are multiple virtual base classes, they are executed in the **order they are declared**.
+- After all virtual base class constructors are executed:
+  - Non-virtual base class constructors are called.
+  - Finally, the derived class constructor is executed.
+
+## Q. What Does Initialization List in Constructors Mean and Why Do We Use It?
+
+### Definition:
+An **initialization list** is used to initialize class data members **before** the constructor body is executed. This is particularly useful for:
+1. Initializing `const` members.
+2. Initializing reference members.
+3. Calling base class constructors in inheritance.
+
+### **Syntax**:
+```cpp
+Constructor(argument-list) : initialization-list {
+    // Other constructor logic
+}```
+
+```cpp
+class Test {
+    int a, b;
+
+public:
+    Test(int i, int j) : a(i), b(j) {
+        cout << "Constructor executed." << endl;
+        cout << "Value of a: " << a << endl;
+        cout << "Value of b: " << b << endl;
+    }
+};
+```
+
+
 # -----------------------------------------------------------------------------------------------------------------------------------------------------
 # Standard Template Library (STL)
 
