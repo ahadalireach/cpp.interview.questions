@@ -1615,7 +1615,6 @@ Ambiguity in inheritance can be defined as when one class is derived from two or
 - If ambiguity occurs in the derived class, we resolve it using the scope resolution operator.
 - If there is a function with the same name in the derived class and base class, then the derived class function will be called, and ambiguity will be resolved automatically. If there is no function in the derived class, then the base class function should be called.
 
-**Example 1:**
 ```cpp
 #include <iostream>
 using namespace std;
@@ -1701,8 +1700,6 @@ A **virtual base class** is a concept used in multiple inheritance to prevent am
 - To solve this ambiguity, we declare class `A` as a **virtual base class** using the `virtual` keyword.
 - With this declaration, only one copy of the data members and member functions of class `A` is shared among classes `B` and `C`.
 
-### Example Code
-
 ```cpp
 #include<iostream>
 using namespace std;
@@ -1729,8 +1726,6 @@ int main() {
 }
 ```
 
-## Example
-
 - **Class Structure**:
   - Class `Student` is a parent class of classes `Test` and `Sports`.
   - Both `Test` and `Sports` are parent classes of class `Result`.
@@ -1746,17 +1741,11 @@ int main() {
 - To resolve this ambiguity, we declare class `Student` as a **virtual base class** using the `virtual` keyword.
 - By making `Student` a virtual base class, only one copy of its data members and member functions is passed to the inheriting classes (`Test` and `Sports`).
 
-## Class Implementations
-
-### Student Class
-
 - The `Student` class consists of:
   - Protected data member: `roll_no`
   - Member functions:
     - `set_number(int a)`: Assigns value to `roll_no`.
     - `print_number()`: Prints the value of `roll_no`.
-
-### Test Class
 
 - The `Test` class inherits from the virtual base class `Student`.
 - It consists of:
@@ -1765,16 +1754,12 @@ int main() {
     - `set_marks(float m1, float m2)`: Assigns values to `maths` and `physics`.
     - `print_marks()`: Prints the values of `maths` and `physics`.
 
-### Sports Class
-
 - The `Sports` class also inherits from the virtual base class `Student`.
 - It consists of:
   - Protected data member: `score`
   - Member functions:
     - `set_score(float sc)`: Assigns value to `score`.
     - `print_score()`: Prints the value of `score`.
-
-### Result Class
 
 - The `Result` class inherits from both `Test` and `Sports`.
 - It consists of:
@@ -1783,9 +1768,7 @@ int main() {
     - `display()`: 
       - Calculates the total score by adding `maths`, `physics`, and `score`.
       - Calls `print_number()`, `print_marks()`, and `print_score()` to display results.
-
-## Example Code
-
+        
 ```cpp
 #include<iostream>
 using namespace std;
@@ -1875,7 +1858,6 @@ int main() {
 ### **Special Syntax for Passing Arguments**
 C++ allows a special syntax to pass arguments to multiple base classes in inheritance.  
 
-**Syntax**:
 ```cpp
 DerivedConstructor(arg1, arg2, arg3...): Base1Constructor(arg1, arg2), Base2Constructor(arg3, arg4) {
     // Derived class body
@@ -1916,7 +1898,6 @@ An **initialization list** is used to initialize class data members **before** t
 2. Initializing reference members.
 3. Calling base class constructors in inheritance.
 
-### **Syntax**:
 ```cpp
 Constructor(argument-list) : initialization-list {
     // Other constructor logic
@@ -2141,6 +2122,34 @@ int main() {
 
 }
 ```
+
+## Q. What is Polymorphism in C++?
+
+Polymorphism in C++ refers to the ability of objects or functions to take on multiple forms or behaviors depending on how they are used.
+- The term "polymorphism" comes from Greek roots meaning "many forms." In C++, it allows functions or objects to behave differently based on their usage context.
+
+
+- **Inheritance:** Polymorphism often leverages inheritance, where subclasses inherit attributes and behaviors from their parent classes. Virtual functions allow these inherited methods to be overridden in derived classes, enabling different implementations.
+
+## Q. What are Different Types of Polymorphism in C++?
+
+### Compile-time Polymorphism
+Compile-time polymorphism is resolved during compilation, where the compiler determines which function or operation to execute.
+
+- **Function Overloading:** Defining multiple functions with the same name but different parameters. The compiler resolves which function to call based on the number and type of arguments provided.
+- **Operator Overloading:** Customizing the behavior of operators like `+`, `-`, etc., for user-defined types by redefining their functionality.
+
+### Run-time Polymorphism
+
+Run-time polymorphism defers method resolution until runtime, allowing for dynamic behavior based on the actual object type.
+- **Virtual Functions:** Functions declared with the `virtual` keyword in the base class can be overridden in derived classes. The specific function to execute is determined by the actual object type at runtime, facilitating dynamic method dispatch.
+
+
+## Q. What is a Virtual Function and What's its Purpose?
+
+A virtual function in C++ is a function declared in a base class with the `virtual` keyword and overridden in derived classes. It enables run-time polymorphism by allowing the correct function to be called for an object, regardless of the expression used to call it.
+
+- **Purpose:** Virtual functions facilitate dynamic method binding, where the correct function implementation is determined based on the actual object type at runtime. This supports flexible and extensible software design by enabling subclasses to provide specialized implementations while adhering to a common interface defined in the base class.
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------
 # Standard Template Library (STL)
