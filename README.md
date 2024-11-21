@@ -2123,33 +2123,326 @@ int main() {
 }
 ```
 
-## Q. What is Polymorphism in C++?
+---
 
-Polymorphism in C++ refers to the ability of objects or functions to take on multiple forms or behaviors depending on how they are used.
-- The term "polymorphism" comes from Greek roots meaning "many forms." In C++, it allows functions or objects to behave differently based on their usage context.
+## What is Polymorphism in C++?
+
+Polymorphism in C++ is the ability of a function or object to take on multiple forms or behaviors depending on the context.
+
+- The word "polymorphism" comes from Greek, meaning "many forms."
+- In C++, polymorphism enables different implementations of the same functionality, often using **inheritance** and **virtual functions**.
+
+- **Inheritance**: Allows derived classes to inherit and override methods from the base class.
+- **Virtual Functions**: Enable different implementations for methods in derived classes while maintaining a common interface in the base class.
+
+Polymorphism in C++ enables the ability to call different methods through the same interface, promoting flexible and reusable code.
+- **Virtual Functions**: Allow derived classes to override base class methods for dynamic behavior.
+- **Dynamic Method Binding**: Ensures that the correct method is executed based on the actual type of the object at runtime.
+  
+---
+
+## What are the types of Polymorphism in C++?
+
+### 1. Compile-time Polymorphism
+Resolved during **compilation**, meaning the compiler determines which function to execute.
+
+- **Function Overloading**: Multiple functions with the same name but different parameter lists.
+- **Operator Overloading**: Custom behavior for operators (`+`, `-`, etc.) for user-defined types.
+
+### 2. Run-time Polymorphism
+Resolved at **runtime**, enabling dynamic behavior based on the actual type of the object.
+
+- **Virtual Functions**: Methods in the base class that can be overridden in derived classes. The function executed depends on the actual object type, not the pointer type.
+
+---
+
+## What is a Virtual Function and Its Purpose?
+
+A **virtual function** is a member function in the base class declared with the `virtual` keyword. It allows the derived class to provide its own implementation, enabling **run-time polymorphism**.
+
+### Purpose:
+- Ensures the correct function is called for an object, regardless of the expression used to reference it.
+- Promotes flexibility and extensibility in software design.
+
+### Rules for Virtual Functions:
+1. Cannot be static.
+2. Accessed via pointers to objects.
+3. Can be a friend of another class.
+4. Redefinition in the derived class is optional.
+5. If not overridden in the derived class, the base class implementation is used.
+
+---
+
+## What is a Pointer to a Derived Class, and Its Purpose?
+
+A **pointer to a derived class** allows dynamic method resolution when a base class pointer points to a derived class object. It ensures the appropriate derived class method is called during runtime if the base class method is virtual.
+
+- **Late Binding**: The compiler determines the method to execute based on the actual object type at runtime.
+- **Runtime Polymorphism**: Achieved when virtual functions in the base class are overridden by derived class methods.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// Base Class
+class Base {
+public:
+    int var = 10;
+    virtual void display() {
+        cout << "Base class variable: " << var << endl;
+    }
+};
+
+// Derived Class
+class Derived : public Base {
+public:
+    int var2 = 20;
+    void display() override {
+        cout << "Derived class variable: " << var2 << endl;
+    }
+};
+
+int main() {
+    // Base class pointer pointing to a Derived class object
+    Base* basePtr;
+    Derived derivedObj;
+    basePtr = &derivedObj;
+
+    // Calls the derived class method due to late binding
+    basePtr->display();
+
+    // Derived class pointer
+    Derived* derivedPtr = &derivedObj;
+    derivedPtr->var2 = 30;
+    derivedPtr->display();
+}
+
+// Output:
+Derived class variable: 20
+Derived class variable: 30
+```
+
+### Base Class Pointers
+- Can access only **inherited members** of the derived class.
+- Cannot directly access new members or methods defined in the derived class.
+
+### Derived Class Pointers
+- Can access:
+  1. **Inherited members** from the base class.
+  2. **New members or methods** defined in the derived class.
+
+```cpp
+// Base Class
+class Base {
+public:
+    int baseVar = 10;  // Base class member
+
+    void displayBase() {
+        cout << "Base class variable: " << baseVar << endl;
+    }
+};
+
+// Derived Class
+class Derived : public Base {
+public:
+    int derivedVar = 20;  // Derived class member
+
+    void displayDerived() {
+        cout << "Derived class variable: " << derivedVar << endl;
+    }
+};
+
+int main() {
+    // Base class pointer pointing to a Derived class object
+    Base* basePtr;
+    Derived derivedObj;
+
+    basePtr = &derivedObj;
+
+    // Accessing inherited member through base class pointer
+    basePtr->baseVar = 15;  // Allowed
+    basePtr->displayBase(); // Allowed
+
+    // basePtr->derivedVar = 25; // Error: Cannot access derived class members
+    // basePtr->displayDerived(); // Error: Cannot access derived class methods
+
+    // Derived class pointer
+    Derived* derivedPtr = &derivedObj;
+
+    // Accessing both base and derived members through derived class pointer
+    derivedPtr->baseVar = 30;       // Allowed
+    derivedPtr->derivedVar = 40;    // Allowed
+    derivedPtr->displayBase();      // Allowed
+    derivedPtr->displayDerived();   // Allowed
+}
+```
+
+```cpp
+class CWH{
+    protected:
+        string title;
+        float rating;
+    public:
+        CWH(string s, float r){
+            title =  s;
+            rating = r;
+        }
+        virtual void display(){}
+};
 
 
-- **Inheritance:** Polymorphism often leverages inheritance, where subclasses inherit attributes and behaviors from their parent classes. Virtual functions allow these inherited methods to be overridden in derived classes, enabling different implementations.
+class CWHVideo: public CWH
+{
+    float videoLength;
+    public:
+        CWHVideo(string s, float r, float vl): CWH(s, r){
+            videoLength = vl;
+        }
+        void display(){
+            cout<<"This is an amazing video with title "<<title<<endl;
+            cout<<"Ratings: "<<rating<<" out of 5 stars"<<endl;
+            cout<<"Length of this video is: "<<videoLength<<" minutes"<<endl;
+        }
+};    
 
-## Q. What are Different Types of Polymorphism in C++?
 
-### Compile-time Polymorphism
-Compile-time polymorphism is resolved during compilation, where the compiler determines which function or operation to execute.
+class CWHText: public CWH
+{
+    int words;
+    public:
+        CWHText(string s, float r, int wc): CWH(s, r){
+            words = wc;
+        }
+     void display(){
+      cout<<"This is an amazing text tutorial with title "<<title<<endl;
+      cout<<"Ratings of this text tutorial: "<<rating<<" out of 5 stars"<<endl;
+      cout<<"No of words in this text tutorial is: "<<words<<" words"<<endl;
+         }
+};
 
-- **Function Overloading:** Defining multiple functions with the same name but different parameters. The compiler resolves which function to call based on the number and type of arguments provided.
-- **Operator Overloading:** Customizing the behavior of operators like `+`, `-`, etc., for user-defined types by redefining their functionality.
 
-### Run-time Polymorphism
+int main(){
+    string title;
+    float rating, vlen;
+    int words;
 
-Run-time polymorphism defers method resolution until runtime, allowing for dynamic behavior based on the actual object type.
-- **Virtual Functions:** Functions declared with the `virtual` keyword in the base class can be overridden in derived classes. The specific function to execute is determined by the actual object type at runtime, facilitating dynamic method dispatch.
+    
+    title = "Django tutorial";
+    vlen = 4.56;
+    rating = 4.89;
+    CWHVideo djVideo(title, rating, vlen);
 
+    
+    title = "Django tutorial Text";
+    words = 433;
+    rating = 4.19;
+    CWHText djText(title, rating, words);
 
-## Q. What is a Virtual Function and What's its Purpose?
+    CWH* tuts[2];
+    tuts[0] = &djVideo;
+    tuts[1] = &djText;
 
-A virtual function in C++ is a function declared in a base class with the `virtual` keyword and overridden in derived classes. It enables run-time polymorphism by allowing the correct function to be called for an object, regardless of the expression used to call it.
+    tuts[0]->display();
+    tuts[1]->display();
+}
+```
 
-- **Purpose:** Virtual functions facilitate dynamic method binding, where the correct function implementation is determined based on the actual object type at runtime. This supports flexible and extensible software design by enabling subclasses to provide specialized implementations while adhering to a common interface defined in the base class.
+---
+
+## Q. What is Pure Virtual Function, Abstract Base Class, and Pure Abstract Base Class?
+
+## Pure Virtual Function
+- A **pure virtual function** is a function declared in a base class and is assigned `= 0`, indicating it has no implementation in the base class.
+- It acts as a placeholder, enforcing derived classes to provide their own implementation.
+
+```cpp
+virtual void display() = 0;
+```
+
+## Abstract Base Class
+An **abstract base class** is a class that contains at least one pure virtual function. 
+- **Cannot be instantiated** (objects cannot be created directly from the class).
+- **Derived classes** must override all pure virtual functions of the abstract class. Otherwise, a **compilation error** occurs.
+
+## Pure Abstract Base Class
+A **pure abstract base class** has only pure virtual functions and no other members.
+- Defines a **strict interface** that all derived classes must follow.
+
+```cpp
+#include<iostream>
+using namespace std;
+
+// Abstract base class with a pure virtual function
+class CWH {
+protected:
+    string title;
+    float rating;
+
+public:
+    CWH(string s, float r) : title(s), rating(r) {}
+
+    virtual void display() = 0; // Pure virtual function
+};
+
+// Derived class for video tutorials
+class CWHVideo : public CWH {
+    float videoLength;
+
+public:
+    CWHVideo(string s, float r, float vl) : CWH(s, r), videoLength(vl) {}
+
+    void display() {
+        cout << "This is an amazing video with title \"" << title << "\"" << endl;
+        cout << "Ratings: " << rating << " out of 5 stars" << endl;
+        cout << "Length of this video: " << videoLength << " minutes" << endl;
+    }
+};
+
+// Derived class for text tutorials
+class CWHText : public CWH {
+    int words;
+
+public:
+    CWHText(string s, float r, int wc) : CWH(s, r), words(wc) {}
+
+    void display() {
+        cout << "This is an amazing text tutorial with title \"" << title << "\"" << endl;
+        cout << "Ratings: " << rating << " out of 5 stars" << endl;
+        cout << "Number of words: " << words << " words" << endl;
+    }
+};
+
+int main() {
+    // Video tutorial
+    string title = "Django Tutorial";
+    float rating = 4.89, videoLength = 4.56;
+    CWHVideo djVideo(title, rating, videoLength);
+
+    // Text tutorial
+    title = "Django Text Tutorial";
+    int words = 433;
+    rating = 4.19;
+    CWHText djText(title, rating, words);
+
+    // Pointer array to base class objects
+    CWH* tutorials[2];
+    tutorials[0] = &djVideo;
+    tutorials[1] = &djText;
+
+    // Display information using pointers
+    tutorials[0]->display();
+    tutorials[1]->display();
+}
+
+Output:
+This is an amazing video with title "Django Tutorial"
+Ratings: 4.89 out of 5 stars
+Length of this video: 4.56 minutes
+
+This is an amazing text tutorial with title "Django Text Tutorial"
+Ratings: 4.19 out of 5 stars
+Number of words: 433 words
+```
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------
 # Standard Template Library (STL)
